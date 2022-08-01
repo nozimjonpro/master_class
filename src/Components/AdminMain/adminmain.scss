@@ -1,0 +1,48 @@
+.admin__main-filter-group {
+  display: flex;
+  align-items: center;
+  padding: 30px 50px;
+  background-color: #fff;
+  border-top: 1px solid rgb(244, 238, 238);
+  border-bottom: 1px solid rgb(244, 238, 238);
+}
+
+.admin__main-filter {
+  display: flex;
+  align-items: center;
+  margin-right: 200px;
+}
+
+.admin__main-label:not(:last-child) {
+  margin-right: 20px;
+}
+
+.admin__main-span {
+  display: block;
+  width: 135px;
+  padding: 15px 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 20px;
+  opacity: 0.6;
+  border-radius: 50px;
+}
+
+.admin__main-input:checked {
+  & + .admin__main-span {
+    background: #016bff;
+    color: #fff;
+    opacity: 1;
+  }
+}
+
+.dmin__main-radio{
+    margin-left: 10px;
+}
+
+.admin__main-radio-label:first-child{
+  margin-right: 50px;
+}
+
+

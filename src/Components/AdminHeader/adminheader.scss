@@ -1,0 +1,68 @@
+.admin__header {
+  padding: 30px 0;
+  padding-right: 50px;
+  background-color: #fff;
+}
+.admin__header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-header__search {
+  position: relative;
+}
+
+.admin-header__input {
+  display: block;
+  max-width: 500px;
+  width: 100%;
+  padding: 10px;
+  padding-left: 40px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+.admin-header__icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.admin-header__right {
+  display: flex;
+  align-items: center;
+}
+
+.admin__user {
+  display: flex;
+  align-items: center;
+}
+
+.admin__username {
+  margin: 0;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+  color: #193951;
+}
+
+.admin__userid {
+  margin: 0;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  color: #193951;
+  opacity: 0.3;
+}
+
+.header-search__bell-icon{
+    margin-right: 30px;
+}
+
+.admin__user-img{
+    margin-right: 10px;
+}
+

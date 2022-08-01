@@ -1,0 +1,25 @@
+.searchbar__select {
+  width: 258px;
+  height: 56px;
+  padding: 10px;
+  padding-left: 75px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  border: none;
+  outline: none;
+}
+
+.searchbar__select-wrapper{
+    position: relative;
+}
+
+.searchber__select-icon{
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+
