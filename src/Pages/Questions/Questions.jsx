@@ -12,15 +12,21 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("https://masterclassjon.herokuapp.com");
 
 function Questions() {
   const [organizator, setOrganizator] = React.useState("legal");
-  const [file, setFile] = React.useState(null);
-
+  const [time, setTime] = React.useState();
+  const [date, setDate] = React.useState();
+  const [legal, setLegal] = React.useState();
+  const [job, setJob] = React.useState();
+  const [name, setName] = React.useState();
+  const [phone, setPhone] = React.useState();
+  const [addphone, setAddphone] = React.useState();
+console.log( legal, job, name, phone, addphone);
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    socket.emit("message", { meassag: "bnnma" });
+    socket.emit("new post", {message: 'bnnma'});
   };
   return (
     <>
@@ -41,17 +47,28 @@ function Questions() {
                 <span className="question__form-span">
                   O'tkaziladigan sanani kiriting
                 </span>
-                <BasicDatePicker className="question__datepicker"></BasicDatePicker>
+                <BasicDatePicker
+                  className="question__datepicker"
+                  setDate={setDate}
+                ></BasicDatePicker>
               </label>
               <label className="question__form-label">
-                <MaterialUIPickers className="question__timepicker"></MaterialUIPickers>
+                <MaterialUIPickers
+                  className="question__timepicker"
+                  setTime={setTime}
+                ></MaterialUIPickers>
               </label>
               <div className="question__date-category">
                 <label className="question__form-label">
                   <span className="question__form-span">
                     Yo'nalishni belgilang
                   </span>
-                  <select className="question__form-select" name="" id="">
+                  <select
+                    className="question__form-select"
+                    name="pattern_select"
+                    id=""
+                    defaultValue="Business training"
+                  >
                     <option hidden>Information technologies</option>
                     <option value="">Information technologies</option>
                     <option value="">Business training</option>
@@ -60,7 +77,12 @@ function Questions() {
                 </label>
                 <label className="question__form-label">
                   <span className="question__form-span">Ichki yo'nalish</span>
-                  <select className="question__form-select" name="" id="">
+                  <select
+                    className="question__form-select"
+                    name="inside_pattern"
+                    id=""
+                    defaultValue="Frontend Developer"
+                  >
                     <option hidden>Information technologies</option>
                     <option value="">Frontend Developer</option>
                     <option value="">Business trainer</option>
@@ -78,7 +100,8 @@ function Questions() {
                     <input
                       className="question__input-online visually-hidden"
                       type="radio"
-                      name="status"
+                      name="statusi"
+                      defaultValue="online"
                     />
                     <span className="question__form-online">Online</span>
                   </label>
@@ -86,7 +109,8 @@ function Questions() {
                     <input
                       className="question__input-online visually-hidden"
                       type="radio"
-                      name="status"
+                      name="statusi"
+                      defaultValue="offline"
                     />
                     <span className="question__form-offline">Offline</span>
                   </label>
@@ -95,7 +119,8 @@ function Questions() {
                   <input
                     className="question__input-link"
                     type="text"
-                    name="status"
+                    defaultValue="https://w3scholls.com"
+                    name="post_link"
                     placeholder="www.something.com"
                   />
                 </label>
@@ -134,9 +159,20 @@ function Questions() {
             </div>
 
             {organizator === "legal" ? (
-              <OrganizatorLegal></OrganizatorLegal>
+              <OrganizatorLegal
+                setLegal={setLegal}
+                setPhone={setPhone}
+                setName={setName}
+                setJob={setJob}
+                setAddphone={setAddphone}
+              ></OrganizatorLegal>
             ) : (
-              <OrganizatorPhysical></OrganizatorPhysical>
+              <OrganizatorPhysical
+                setPhone={setPhone}
+                setName={setName}
+                setJob={setJob}
+                setAddphone={setAddphone}
+              ></OrganizatorPhysical>
             )}
 
             <div className="question__post">
@@ -146,6 +182,8 @@ function Questions() {
                 <input
                   className="question-post__input"
                   type="text"
+                  defaultValue="hammasi orta qoladi"
+                  name="post_title"
                   placeholder="Title"
                 />
               </label>
@@ -153,19 +191,20 @@ function Questions() {
                 <span className="question-post__span">Rasm yuklash</span>
                 <input
                   className="question-post__input"
-                  type="file"
-                  multiple="multiple"
-                  onChange={(e) => setFile(e.target.files)}
+                  type="text"
+                  defaultValue='https://picsum.photos/407/417'
+                  name="post_file"
                 />
               </label>
               <label className="question-post__label">
                 <span className="question-post__span">Description</span>
                 <textarea
                   className="question-post__input-area"
-                  name=""
+                  name="post_desc"
                   id=""
                   cols="30"
                   rows="10"
+                  defaultValue="bu kunlar otar ketar..."
                 ></textarea>
               </label>
               <button className="question__cancel-btn">Bekor qilish</button>

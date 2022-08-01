@@ -12,16 +12,16 @@ function Login() {
     const {username, password} = evt.target.elements;
 
   
-    fetch('http://localhost:5000/login', {
-      method: 'POST',
-      headers : {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: username.value.trim(),
-        password: password.value.trim()
-      })
-    }).then(res => res.json()).then(data=>setToken(data.token))
+  fetch('https://masterclassjon.herokuapp.com/organizators/login', {
+    method: 'POST',
+    headers : {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: username.value.trim(),
+      password: password.value.trim()
+    })
+  }).then(res => res.json()).then(data=>setToken(data.token))
 
     
 

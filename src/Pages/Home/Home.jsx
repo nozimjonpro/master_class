@@ -8,6 +8,7 @@ import ManImage1 from "../../Img/image1.svg";
 import ManImage2 from "../../Img/image2.svg";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
+import {Link} from 'react-router-dom'
 
 function Home() {
   const [data, setData] = React.useState([]);
@@ -15,12 +16,26 @@ function Home() {
   const [course, setCourse] = React.useState();
   const [lesson, setLesson] = React.useState();
   const [name, setName] = React.useState();
-console.log(data);
+  console.log(data);
   React.useEffect(() => {
-    fetch("http://localhost:5000/organizators")
+    fetch("https://masterclassjon.herokuapp.com/organizators")
       .then((res) => res.json())
       .then((data) => setData(data.data));
   }, []);
+
+  function formatDate(anyDate){
+    var date = new Date(anyDate);
+
+    // Get year, month, and day part from the date
+    var year = date.toLocaleString("default", {
+      year: "numeric",
+    });
+    var month = date.toLocaleString("default", {
+      month: "2-digit",
+    });
+    var day = date.toLocaleString("default", { day: "2-digit" });
+    return  day + "-" + month + "-" + year;
+  }
 
   return (
     <>
@@ -64,24 +79,43 @@ console.log(data);
         <section className="announces">
           <div className="container">
             <ul className="announces__list">
-              {
-              data.length > 0 && data.map(item => {
-               return <li key={item.organizator_id}>
-                    <img  className="announce__img" src={item.image} alt="image"/>
-                    <div className="announce__info">
-                      <h3 className="announce__title">{item.title}</h3>
-                      <div className="announce__times">
-                        <span className="announce__speaker">{item.speaker}</span>
-                        <span className="announce__speaker-job">{item.profession}</span>
-                        <span className="announce__date">{item.start_date}</span>
-                        <span className="announce__time">{item.start_time}</span>
-                        <span className="announce__event">{item.event_type}</span>
-                        <span className="announce__watched"></span>
+              {data.length > 0 &&
+                data.map((item) => {
+                  return (
+                    <li className="announce__item" key={item.organizator_id}>
+                      <Link className="announce__item" to={'/organizator/' + item.organizator_id}>
+                      <img
+                        className="announce__img"
+                        src={item.image}
+                        alt="image"
+                      />
+                      <div className="announce__info">
+                        <h3 className="announce__title">{item.title}</h3>
+                        <div className="announce__times">
+                          <span className="announce__speaker">
+                            {item.speaker}
+                          </span>
+                          <span className="announce__speaker-job">
+                            {item.profession}
+                          </span>
+                          <span className="announce__date">
+                            {formatDate(item.start_date)}
+                          </span>
+                          <span className="announce__time">
+                            {item.start_time}
+                          </span>
+                          <span className="announce__event">
+                            {item.event_type}
+                          </span>
+                          <span className="announce__watched">
+                            {data.length}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                </li>
-              })
-            }
+                      </Link>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
         </section>
